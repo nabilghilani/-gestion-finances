@@ -1,114 +1,88 @@
-# Gestion de Finances Personnelles
+# Gestion Financière — Version 2 (multi-entités)
 
-Application de bureau (Windows) pour gérer tes entrées/sorties d'argent,
-tes dépenses, tes budgets mensuels, avec statistiques et export Excel.
-Les données sont sauvegardées dans un fichier local `finances.db` (SQLite),
-créé automatiquement à côté du `.exe` — tes données restent d'une session à l'autre.
+Nouvelle version complète de l'application : écran de sélection d'entité,
+menu par zone (Recettes / Dépenses / Dettes / Dashboard), catégories
+modifiables, et un dashboard où cliquer une ligne renvoie directement dans
+le formulaire de modification. Base de données locale SQLite (`finances.db`),
+créée à côté du `.exe`.
 
-## Obtenir le fichier .exe (sans installer Python) via GitHub Actions
+Cette version **remplace complètement** les fichiers de l'ancienne version
+dans ton dépôt GitHub `nabilghilani/-gestion-finances`.
 
-Tu as déjà Git installé, donc voici la marche à suivre. Ça prend environ 10 minutes
-la première fois, puis 2 minutes pour chaque mise à jour future.
+## Étape 1 : Nettoyer l'ancien dossier
 
-### Étape 1 : Créer un compte GitHub (si tu n'en as pas)
+Dans ton dossier `gestion finance` sur ton PC, **supprime ces anciens
+fichiers** (ils ne servent plus) :
+- `gestion_finances.py` (ancienne version, avec un "s")
+- `export_excel.py`
+- Les éventuels fichiers `.xlsx` que tu aurais mis dedans
 
-Va sur https://github.com et crée un compte gratuit.
+Garde uniquement le dossier `.github` (on va remplacer son contenu) et le
+`.git` cachée (ne surtout pas la toucher).
 
-### Étape 2 : Créer un nouveau dépôt (repository)
+## Étape 2 : Copier les nouveaux fichiers
 
-1. Clique sur le bouton "+" en haut à droite, puis "New repository"
-2. Donne-lui un nom, par exemple `gestion-finances`
-3. Laisse-le en "Public" ou "Private" (peu importe)
-4. Ne coche PAS "Add a README" (on a déjà le nôtre)
-5. Clique sur "Create repository"
-
-GitHub va t'afficher une page avec des commandes — garde cette page ouverte,
-tu en auras besoin à l'étape 4.
-
-### Étape 3 : Préparer le dossier sur ton PC
-
-Crée un dossier sur ton PC (par exemple `gestion-finances`) et mets-y
-tous les fichiers fournis, en respectant cette structure exacte :
+Place ces fichiers dans le même dossier `gestion finance`, en remplaçant
+`.github/workflows/build.yml` par la nouvelle version fournie :
 
 ```
-gestion-finances/
+gestion finance/
 ├── .github/
 │   └── workflows/
-│       └── build.yml
-├── gestion_finances.py
-├── database.py
-├── export_excel.py
-├── requirements.txt
-└── README.md
+│       └── build.yml        <- remplace l'ancien
+├── gestion_financiere.py    <- nouveau fichier principal
+├── database.py               <- remplace l'ancien
+├── requirements.txt          <- remplace l'ancien
+└── README.md                 <- remplace l'ancien
 ```
 
-Important : le dossier `.github` doit être à la racine, avec un point devant.
+## Étape 3 : Envoyer la mise à jour sur GitHub
 
-### Étape 4 : Envoyer le code sur GitHub avec Git
-
-Ouvre une invite de commande (cmd) **dans ce dossier**, puis tape ces
-commandes une par une (remplace `TON-NOM-UTILISATEUR` et `gestion-finances`
-par les tiens, visibles sur la page GitHub de l'étape 2) :
-
-```
-git init
-git add .
-git commit -m "Premiere version de l'application"
-git branch -M main
-git remote add origin https://github.com/TON-NOM-UTILISATEUR/gestion-finances.git
-git push -u origin main
-```
-
-GitHub te demandera peut-être de te connecter (une fenêtre s'ouvre, ou on
-te demande un token) — suis les instructions à l'écran.
-
-### Étape 5 : Récupérer ton .exe compilé
-
-1. Va sur la page de ton dépôt GitHub dans ton navigateur
-2. Clique sur l'onglet "Actions" (en haut)
-3. Tu verras un workflow en cours ("Build Windows EXE") — attends qu'il
-   devienne vert (environ 2-3 minutes)
-4. Clique dessus, puis descends jusqu'à la section "Artifacts"
-5. Clique sur "GestionFinances-exe" pour télécharger un fichier `.zip`
-6. Dézippe-le : à l'intérieur se trouve `GestionFinances.exe`
-
-C'est ton exécutable, prêt à l'emploi. Double-clique dessus pour lancer
-l'application — aucune installation de Python n'est nécessaire sur cette machine.
-
-### Mettre à jour l'application plus tard
-
-Si je te fournis une nouvelle version des fichiers `.py`, remplace-les dans
-ton dossier, puis dans l'invite de commande :
+Ouvre ton terminal dans ce dossier (celui qui fonctionnait déjà pour toi) :
 
 ```
 git add .
-git commit -m "Mise a jour"
+git commit -m "Version 2 - multi-entites"
 git push
 ```
 
-Un nouveau `.exe` sera automatiquement recompilé — reviens à l'étape 5 pour
-le télécharger.
+## Étape 4 : Récupérer le nouveau .exe
 
-## Utilisation de l'application
+1. Va sur **https://github.com/nabilghilani/-gestion-finances**
+2. Onglet **"Actions"**
+3. Attends la coche verte ✅ (2-3 minutes)
+4. Télécharge l'artefact **"GestionFinanciere-exe"**, dézippe-le
+5. Tu obtiens `GestionFinanciere.exe`
 
-- **Tableau de bord** : solde, revenus/dépenses du mois, dernières transactions
-- **Transactions** : ajouter/modifier/supprimer, filtrer par mois ou type
-- **Budgets** : définir un budget mensuel par catégorie, suivre la progression
-- **Statistiques** : camembert des dépenses, comparatif revenus/dépenses sur 6 mois
-- **Export Excel** : bouton en haut du tableau de bord
+Double-clique dessus pour lancer l'application.
 
-Le fichier `finances.db` est créé à côté de `GestionFinances.exe` au premier
-lancement. Ne le supprime pas si tu veux garder ton historique. Tu peux le
-copier ailleurs pour faire une sauvegarde.
+**Important** : c'est un nouveau nom de fichier (`GestionFinanciere.exe`,
+sans "s") et une nouvelle base de données (`finances.db` recréée à zéro,
+vide au départ) — l'ancien `.exe` et son ancienne base peuvent être
+supprimés ou gardés de côté, ils ne sont plus utilisés.
 
-## Personnaliser les catégories ou la devise
+## Utilisation
 
-Ouvre `gestion_finances.py` et modifie en haut du fichier :
+1. **Écran de démarrage** : choisis une entité (Personnel, ou crée-en une
+   nouvelle avec le champ en bas) ou supprime une entité existante
+2. **Menu** : clique Recettes / Dépenses / Dettes / Dashboard
+3. Dans une zone : remplis le formulaire puis clique **Ajouter**. Clique une
+   ligne de la liste pour la charger dans le formulaire, modifie puis clique
+   **Enregistrer les modifications**, ou **Supprimer la sélection**
+4. **Dashboard** : filtre par catégorie, regarde tes indicateurs et ton
+   camembert de dépenses. **Double-clique une ligne** du tableau pour être
+   renvoyé directement dans le formulaire de modification de cette ligne
+5. Le bouton **"☰ Menu"** en haut de chaque zone te ramène au menu de
+   l'entité ; **"↩ Changer d'entité"** te ramène à l'écran de démarrage
 
-```python
-CATEGORIES_DEPENSE = ["Alimentation", "Transport", "Logement", ...]
-CATEGORIES_REVENU = ["Salaire", "Freelance", ...]
-```
+## Ajouter une catégorie
 
-Pour la devise, remplace "DA" par la tienne dans `gestion_finances.py` et
-`export_excel.py`, puis relance les étapes 4 et 5 pour recompiler.
+Dans les zones Recettes / Dépenses / Dettes, clique **"+ Nouvelle
+catégorie"** à côté du champ Catégorie : elle est immédiatement disponible
+dans la liste déroulante.
+
+## Sauvegarder tes données
+
+Le fichier `finances.db`, créé à côté de `GestionFinanciere.exe`, contient
+tout ton historique (entités, recettes, dépenses, dettes, catégories).
+Copie-le régulièrement ailleurs (clé USB, cloud) pour faire une sauvegarde.

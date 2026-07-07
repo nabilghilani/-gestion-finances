@@ -25,10 +25,10 @@ jobs:
 
       - name: Compiler l'exécutable avec PyInstaller
         run: |
-          pyinstaller --onefile --windowed --name GestionFinances gestion_finances.py
+          pyinstaller --onefile --windowed --name GestionFinanciere gestion_financiere.py
 
       - name: Publier le .exe comme artefact téléchargeable
         uses: actions/upload-artifact@v4
         with:
-          name: GestionFinances-exe
-          path: dist/GestionFinances.exe
+          name: GestionFinanciere-exe
+          path: dist/GestionFinanciere.exe
